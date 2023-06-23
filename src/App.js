@@ -1,3 +1,4 @@
+import { myProfileData, friendsData } from './data';
 import { ProfileInfo } from './ProfileInfo';
 import { WelcomeMessage } from './WelcomeMessage';
 import './App.css';
@@ -7,8 +8,14 @@ export const App = () => {
     <>
       <h1>Friend Tracker</h1>
       <div className='content-container'>
-        <WelcomeMessage />
-        <ProfileInfo />
+        <WelcomeMessage name={myProfileData.name} />
+        <ProfileInfo person={myProfileData} />
+        <WelcomeMessage name={friendsData[0].name} />
+        <ProfileInfo person={friendsData[0]} />
+        <WelcomeMessage name={friendsData[1].name} />
+        <ProfileInfo person={friendsData[1]} />
+        <WelcomeMessage name={friendsData[2].name} />
+        <ProfileInfo person={friendsData[2]} />
       </div>
     </>
   );

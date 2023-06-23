@@ -1,29 +1,28 @@
-import { myProfileData } from "./data";
 import './ProfileInfo.css';
 
-export const ProfileInfo = () => {
+export const ProfileInfo = ({ person: { profilePicUrl, name, age, bio, birthday, interests } }) => {
   return (
 		<>
 			<div className="profile-pic-container">
 				<div className="profile-pic-wrap">
 					<img
 						className="profile-pic"
-						src={myProfileData.profilePicUrl}
-						alt={`${myProfileData.name} profile picture`}
+						src={profilePicUrl}
+						alt={`${name} profile picture`}
 					/>
 				</div>
 			</div>
 			<h2 className="content-heading">My Profile</h2>
 			<h3>Name</h3>
-			<p>{myProfileData.name}</p>
+			<p>{name}</p>
 			<h3>Age</h3>
-			<p>{myProfileData.age}</p>
+			<p>{age}</p>
 			<h3>Bio</h3>
-			<p>{myProfileData.bio}</p>
+			<p>{bio}</p>
 			<h3>Birthday</h3>
-			<p>{myProfileData.birthday}</p>
+			<p>{birthday}</p>
 			<h3>Interests</h3>
-			<p>{myProfileData.interests.join(', ')}</p>
+			<p>{interests.join(', ')}</p>
 		</>
   );
 }
