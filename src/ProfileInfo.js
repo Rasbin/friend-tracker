@@ -1,28 +1,48 @@
-import './ProfileInfo.css';
+import PropTypes from 'prop-types';
+import styles from './ProfileInfo.module.css';
 
-export const ProfileInfo = ({ person: { profilePicUrl, name, age, bio, birthday, interests } }) => {
+const ProfileInfo = ({ person: { profilePicUrl, name, age, bio, birthday, interests } }) => {
+	const displaySummary = message => {
+		alert(`${name} is ${age} years old. ${message}`);
+	}
+
   return (
 		<>
-			<div className="profile-pic-container">
-				<div className="profile-pic-wrap">
+			<div className={styles.profilePicContainer}>
+				<div className={styles.profilePicWrap}>
 					<img
-						className="profile-pic"
+						className={styles.profilePic}
 						src={profilePicUrl}
-						alt={`${name} profile picture`}
+						alt={`${name}`}
 					/>
 				</div>
 			</div>
-			<h2 className="content-heading">My Profile</h2>
-			<h3>Name</h3>
+
+			<button onClick={() => displaySummary('Hi there')}>Display Summary</button>
+
+			<h3 className={styles.detailHeading}>Name</h3>
 			<p>{name}</p>
-			<h3>Age</h3>
+			<h3 className={styles.detailHeading}>Age</h3>
 			<p>{age}</p>
-			<h3>Bio</h3>
+			<h3 className={styles.detailHeading}>Bio</h3>
 			<p>{bio}</p>
-			<h3>Birthday</h3>
+			<h3 className={styles.detailHeading}>Birthday</h3>
 			<p>{birthday}</p>
-			<h3>Interests</h3>
+			<h3 className={styles.detailHeading}>Interests</h3>
 			<p>{interests.join(', ')}</p>
 		</>
   );
 }
+
+ProfileInfo.protoTypes = {
+	person: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		profilePicUrl: PropTypes.string,
+		age: PropTypes.number,
+		bio: PropTypes.string,
+		birthday: PropTypes.string,
+		interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+	}).isRequired,
+}
+
+export { ProfileInfo };

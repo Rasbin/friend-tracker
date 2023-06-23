@@ -1,21 +1,29 @@
 import { myProfileData, friendsData } from './data';
+import { PersonCard } from './PersonCard';
 import { ProfileInfo } from './ProfileInfo';
 import { WelcomeMessage } from './WelcomeMessage';
-import './App.css';
+import  styles from './App.module.css';
 
 export const App = () => {
   return (
     <>
       <h1>Friend Tracker</h1>
-      <div className='content-container'>
+      <div className={styles.contentContainer}>
         <WelcomeMessage name={myProfileData.name} />
+        <h2 className={styles.contentHeading}>My Profile</h2>
         <ProfileInfo person={myProfileData} />
-        <WelcomeMessage name={friendsData[0].name} />
-        <ProfileInfo person={friendsData[0]} />
-        <WelcomeMessage name={friendsData[1].name} />
-        <ProfileInfo person={friendsData[1]} />
-        <WelcomeMessage name={friendsData[2].name} />
-        <ProfileInfo person={friendsData[2]} />
+        <h2 className={styles.contentHeading}>My Friends</h2>
+        <div className={styles.peopleList}>
+          <div className={styles.peopleListItem}>
+            <PersonCard person={friendsData[0]} />
+          </div>
+          <div className={styles.peopleListItem}>
+            <PersonCard person={friendsData[1]} />
+          </div>
+          <div className={styles.peopleListItem}>
+            <PersonCard person={friendsData[2]} />
+          </div>
+        </div>
       </div>
     </>
   );
