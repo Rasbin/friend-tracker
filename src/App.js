@@ -4,10 +4,12 @@ import './App.css';
 
 export const App = () => {
   return (
-    <div>
+    <>
       <h1>Friend Tracker</h1>
-      <WelcomeMessage />
-      <ProfileInfo />
-    </div>
+      <div className='content-container'>
+        <WelcomeMessage />
+        <ProfileInfo />
+      </div>
+    </>
   );
 }
