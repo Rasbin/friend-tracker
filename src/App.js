@@ -1,12 +1,18 @@
+import { useState } from 'react';
 import { myProfileData, friendsData } from './data';
-import { PersonCard } from './PersonCard';
+import { PeopleList } from './PeopleList';
 import { ProfileInfo } from './ProfileInfo';
 import { WelcomeMessage } from './WelcomeMessage';
-import { useState } from 'react';
 import  styles from './App.module.css';
 
 export const App = () => {
   const [favoriteIds, setFavoriteIds] = useState([]);
+
+  const favorites = favoriteIds.map(id =>
+    friendsData.find(friend => friend.id === id));
+  
+  const nonFavorites = friendsData.filter(friend =>
+    !favoriteIds.find(id => friend.id === id));
 
   const toggleFavorite = personId => {
     if (favoriteIds.includes(personId)) {
@@ -25,26 +31,10 @@ export const App = () => {
         <ProfileInfo person={myProfileData} />
         <h2 className={styles.contentHeading}>My Friends</h2>
         <p>You have {favoriteIds.length} {favoriteIds.length === 1 ? 'favorite' : 'favorites'}</p>
-        <div className={styles.peopleList}>
-          <div className={styles.peopleListItem}>
-            <PersonCard
-              onCardClicked={toggleFavorite}
-              person={friendsData[0]}
-              isFavorite={favoriteIds.includes(friendsData[0].id)} />
-          </div>
-          <div className={styles.peopleListItem}>
-            <PersonCard
-              onCardClicked={toggleFavorite}
-              person={friendsData[1]}
-              isFavorite={favoriteIds.includes(friendsData[1].id)} />
-          </div>
-          <div className={styles.peopleListItem}>
-            <PersonCard
-              onCardClicked={toggleFavorite}
-              person={friendsData[2]}
-              isFavorite={favoriteIds.includes(friendsData[2].id)} />
-          </div>
-        </div>
+        <h2 className={styles.contentHeading}>Favorites</h2>
+        <PeopleList people={favorites} onClickPerson={toggleFavorite} />
+        <h2 className={styles.contentHeading}>My Friends</h2>
+        <PeopleList people={nonFavorites} onClickPerson={toggleFavorite} />
       </div>
     </>
   );

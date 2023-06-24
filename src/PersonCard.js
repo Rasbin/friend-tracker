@@ -3,13 +3,12 @@ import styles from './PersonCard.module.css';
 
 const PersonCard = ({ 
   person: { id, profilePicUrl, name, age },
-  isFavorite,
   onCardClicked,
  }) => {
 
   return (
     <div
-      className={isFavorite ? styles.cardFavorite : styles.cardNormal}
+      className={styles.card}
       onClick={() => onCardClicked(id)}>
       <div className={styles.profilePicLeft}>
         <div className={styles.profilePicWrap}>
@@ -37,7 +36,6 @@ PersonCard.propTypes = {
 		profilePicUrl: PropTypes.string,
 		age: PropTypes.number,
 	}).isRequired,
-  isFavorite: PropTypes.bool,
   onCardClicked: PropTypes.func,
 }
 
