@@ -30,7 +30,7 @@ const ProfileInfo = ({ person: { profilePicUrl, name, age, bio, birthday, intere
 			<h3 className={styles.detailHeading}>Birthday</h3>
 			<p>{birthday}</p>
 			<h3 className={styles.detailHeading}>Interests</h3>
-			{ interests.map(interest => <Tag text={interest} />) }
+			{ interests.map(interest => <Tag key={interest} text={interest} />) }
 		</>
   );
 }
