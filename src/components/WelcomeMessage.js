@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import styles from './WelcomeMessage.module.css';
 
 const WelcomeMessage = ({name}) => {
-  const [isVisible, setIsVisible] = useState(true);
+  const hasBeenHidden = localStorage.getItem('welcomeMessageHidden');
+  const [isVisible, setIsVisible] = useState(!hasBeenHidden);
+
+  const hide = () => {
+    setIsVisible(false);
+    localStorage.setItem('welcomeMessageHidden', true);
+  }
 
   return isVisible ? (
     <div className={styles.welcomeMessage}>
       <h2>Welcome to the Friend-Tracker app, {name}</h2>
-      <button onClick={() => setIsVisible(false)}>Hide</button>
+      <button onClick={hide}>Hide</button>
     </div>
   ) : null;
 }

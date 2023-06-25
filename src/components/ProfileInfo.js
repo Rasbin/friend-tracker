@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import { Tag } from './Tag';
 import styles from './ProfileInfo.module.css';
 
-const ProfileInfo = ({ person: { profilePicUrl, name, age, bio, birthday, interests } }) => {
-	const displaySummary = message => {
-		alert(`${name} is ${age} years old. ${message}`);
-	}
-
+const ProfileInfo = ({
+	person: { profilePicUrl, name, age, bio, birthday, interests },
+	actionName,
+	onAction,
+ }) => {
   return (
 		<>
 			<div className={styles.profilePicContainer}>
@@ -19,8 +19,6 @@ const ProfileInfo = ({ person: { profilePicUrl, name, age, bio, birthday, intere
 				</div>
 			</div>
 
-			<button onClick={() => displaySummary('Hi there')}>Display Summary</button>
-
 			<h3 className={styles.detailHeading}>Name</h3>
 			<p>{name}</p>
 			<h3 className={styles.detailHeading}>Age</h3>
@@ -31,6 +29,7 @@ const ProfileInfo = ({ person: { profilePicUrl, name, age, bio, birthday, intere
 			<p>{birthday}</p>
 			<h3 className={styles.detailHeading}>Interests</h3>
 			{ interests.map(interest => <Tag key={interest} text={interest} />) }
+			{actionName && onAction && <button className={styles.actionButton} onClick={onAction}>{actionName}</button>}
 		</>
   );
 }
@@ -44,6 +43,8 @@ ProfileInfo.protoTypes = {
 		birthday: PropTypes.string,
 		interests: PropTypes.arrayOf(PropTypes.string).isRequired,
 	}).isRequired,
+		actionName: PropTypes.string,
+		onAction: PropTypes.func,
 }
 
 export { ProfileInfo };
