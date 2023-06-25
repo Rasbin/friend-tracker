@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import { PropTypes } from 'prop-types';
 import { friendsData } from "../data";
+import { FavoritesContext } from "../contexts/FavoritesContext";
 import { ProfileInfo } from "../components/ProfileInfo";
-const FriendDetailPage = ({ favoriteIds = [], onToggleFavorite }) => {
+
+const FriendDetailPage = () => {
+  const { favoriteIds, toggleFavorite } = useContext(FavoritesContext);
   const { friendId } = useParams();
   const selectedFriend = friendsData.find(friend => friend.id === friendId)
 
@@ -12,7 +15,7 @@ const FriendDetailPage = ({ favoriteIds = [], onToggleFavorite }) => {
     <ProfileInfo
       person={selectedFriend}
       actionName={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-      onAction={() => onToggleFavorite(friendId)} />
+      onAction={() => toggleFavorite(friendId)} />
   ) : (
     <>
       <p>Oops! Couldn't find that friend</p>
@@ -21,11 +24,6 @@ const FriendDetailPage = ({ favoriteIds = [], onToggleFavorite }) => {
       </Link>
     </>
   );
-}
-
-FriendDetailPage.propTypes = {
-  favoriteIds: PropTypes.arrayOf(PropTypes.string),
-  onToggleFavorite: PropTypes.func.isRequired,
 }
 
 export { FriendDetailPage };
