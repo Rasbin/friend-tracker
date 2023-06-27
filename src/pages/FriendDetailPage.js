@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import { friendsData } from "../data";
 import { FavoritesContext } from "../contexts/FavoritesContext";
+import { FriendsContext } from "../contexts/FriendsContext";
 import { ProfileInfo } from "../components/ProfileInfo";
 
 const FriendDetailPage = () => {
   const { favoriteIds, toggleFavorite } = useContext(FavoritesContext);
+  const { friends } = useContext(FriendsContext);
+
   const { friendId } = useParams();
-  const selectedFriend = friendsData.find(friend => friend.id === friendId)
+  const selectedFriend = friends.find(friend => friend.id === friendId)
 
   const isFavorite = favoriteIds.includes(friendId);
 

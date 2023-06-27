@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FavoritesContext } from "../contexts/FavoritesContext";
 
 const FavoritesProvider = ({ children }) => {
-  const existingState = JSON.parse(sessionStorage.getItem('favoriteIds'));
+  const existingState = JSON.parse(localStorage.getItem('favoriteIds'));
   const [favoriteIds, setFavoriteIds] = useState(existingState || []);
 
   const toggleFavorite = personId => {
@@ -11,7 +11,7 @@ const FavoritesProvider = ({ children }) => {
       : favoriteIds.concat(personId)
     
     setFavoriteIds(newFavoriteIds);
-    sessionStorage.setItem('favoriteIds', JSON.stringify(newFavoriteIds));
+    localStorage.setItem('favoriteIds', JSON.stringify(newFavoriteIds));
   }
 
   return (

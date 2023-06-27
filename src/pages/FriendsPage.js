@@ -1,20 +1,22 @@
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { myProfileData, friendsData } from '../data';
+import { myProfileData } from '../data';
 import { FavoritesContext } from '../contexts/FavoritesContext';
+import { FriendsContext } from '../contexts/FriendsContext';
 import { PeopleList } from '../components/PeopleList';
 import { WelcomeMessage } from '../components/WelcomeMessage';
 import styles from './FriendsPage.module.css';
 
 const FriendsPage = () => {
   const { favoriteIds, toggleFavorite } = useContext(FavoritesContext);
+  const { friends } = useContext(FriendsContext);
 
   const history = useHistory();
 
   const favorites = favoriteIds.map(id =>
-    friendsData.find(friend => friend.id === id));
+    friends.find(friend => friend.id === id));
   
-  const nonFavorites = friendsData.filter(friend =>
+  const nonFavorites = friends.filter(friend =>
     !favoriteIds.find(id => friend.id === id));
   
     const goToPersonDetail = personId => {
