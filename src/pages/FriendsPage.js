@@ -37,7 +37,8 @@ const FriendsPage = () => {
           people={nonFavorites}
           onClickPerson={goToPersonDetail}
           personActionName="Add to Favorites"
-          onPersonAction={toggleFavorite} />
+          onPersonAction={toggleFavorite}
+          allowAdditions />
       </>
     );
 }

@@ -1,0 +1,12 @@
+.cardContainer {
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  min-height: 246px;
+  padding: 8px;
+}

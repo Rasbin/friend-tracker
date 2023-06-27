@@ -1,5 +1,7 @@
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { PersonCard } from './PersonCard';
+import { NewFriendCard } from './NewFriendCard';
 import styles from './PeopleList.module.css';
 
 const PeopleList = ({ 
@@ -7,7 +9,9 @@ const PeopleList = ({
   onClickPerson = () => {},
   personActionName,
   onPersonAction,
+  allowAdditions,
 }) => {
+  const history = useHistory();
   return (
     <div className={styles.peopleList}>
       {people.map(person => (
@@ -18,8 +22,12 @@ const PeopleList = ({
             actionName={personActionName}
             onAction={onPersonAction} />
         </div>
-        )
-      )}
+      ))}
+        { allowAdditions && (
+         <div className={styles.peopleListItem}>
+          <NewFriendCard onClick={() => history.push('/new-friend')} />
+          </div>
+        )}
     </div>
   );
 }
@@ -36,6 +44,7 @@ PeopleList.propTypes = {
   onClickPerson: PropTypes.func,
   personActionName: PropTypes.string,
   onPersonAction: PropTypes.func,
+  allowAdditions: PropTypes.bool,
 }
 
 export { PeopleList };

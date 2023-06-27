@@ -1,6 +1,7 @@
 import { BrowserRouter, Route } from 'react-router-dom';
 import { FriendDetailPage } from './pages/FriendDetailPage';
 import { FriendsPage } from './pages/FriendsPage';
+import { NewFriendPage } from './pages/NewFriendPage';
 import { UserProfilePage } from './pages/UserProfilePage';
 import { FavoritesProvider } from './components/FavoritesProvider';
 import { NavBar } from './components/NavBar';
@@ -20,6 +21,9 @@ export const App = () => {
           </Route>
           <Route path='/user-profile'>
             <UserProfilePage />
+          </Route>
+          <Route path='/new-friend'>
+            <NewFriendPage />
           </Route>
         </div>
       </FavoritesProvider>
