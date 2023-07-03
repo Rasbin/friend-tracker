@@ -4,8 +4,7 @@ import styles from './ProfileInfo.module.css';
 
 const ProfileInfo = ({
 	person: { profilePicUrl, name, age, bio, birthday, interests },
-	actionName,
-	onAction,
+	actions,
  }) => {
   return (
 		<>
@@ -29,7 +28,12 @@ const ProfileInfo = ({
 			<p>{birthday}</p>
 			<h3 className={styles.detailHeading}>Interests</h3>
 			{ interests.map(interest => <Tag key={interest} text={interest} />) }
-			{actionName && onAction && <button className={styles.actionButton} onClick={onAction}>{actionName}</button>}
+			{actions.map(action => (
+				<button
+					key={action.actionName}
+					className={styles.actionButton}
+					onClick={action.handler}>{action.actionName}</button>
+			))}
 		</>
   );
 }
@@ -43,8 +47,12 @@ ProfileInfo.protoTypes = {
 		birthday: PropTypes.string,
 		interests: PropTypes.arrayOf(PropTypes.string).isRequired,
 	}).isRequired,
-		actionName: PropTypes.string,
-		onAction: PropTypes.func,
+		action: PropTypes.arrayOf(
+			PropTypes.shape({
+				actionName: PropTypes.string.isRequired,
+				handler: PropTypes.func.isRequired,
+			})
+		)
 }
 
 export { ProfileInfo };

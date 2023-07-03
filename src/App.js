@@ -1,4 +1,5 @@
 import { BrowserRouter, Route } from 'react-router-dom';
+import { EditFriendPage } from './pages/EditFriendPage';
 import { FriendDetailPage } from './pages/FriendDetailPage';
 import { FriendsPage } from './pages/FriendsPage';
 import { NewFriendPage } from './pages/NewFriendPage';
@@ -20,6 +21,9 @@ export const App = () => {
             </Route>
             <Route path='/friends/:friendId'>
               <FriendDetailPage />
+            </Route>
+            <Route path='/edit/:friendId'>
+              <EditFriendPage />
             </Route>
             <Route path='/user-profile'>
               <UserProfilePage />

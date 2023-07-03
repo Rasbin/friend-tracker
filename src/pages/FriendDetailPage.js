@@ -1,10 +1,12 @@
 import { useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { FavoritesContext } from "../contexts/FavoritesContext";
 import { FriendsContext } from "../contexts/FriendsContext";
 import { ProfileInfo } from "../components/ProfileInfo";
 
 const FriendDetailPage = () => {
+  const history = useHistory();
+
   const { favoriteIds, toggleFavorite } = useContext(FavoritesContext);
   const { friends } = useContext(FriendsContext);
 
@@ -13,11 +15,18 @@ const FriendDetailPage = () => {
 
   const isFavorite = favoriteIds.includes(friendId);
 
+  const pageActions = [{
+    actionName: isFavorite ? 'Remove from Favorites' : 'Add to Favorites',
+    handler: () => toggleFavorite(friendId)
+  }, {
+    actionName: 'Edit Info',
+    handler: () => history.push(`/edit/${friendId}`)
+  }];
+
   return selectedFriend ? (
     <ProfileInfo
       person={selectedFriend}
-      actionName={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-      onAction={() => toggleFavorite(friendId)} />
+      actions={pageActions} />
   ) : (
     <>
       <p>Oops! Couldn't find that friend</p>
